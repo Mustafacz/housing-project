@@ -1,42 +1,23 @@
-package com.example.bostadsplattform.model;
-
-
-import jakarta.persistence.*;
+package com.example.bostadsplattform.dto;
 
 import java.time.LocalDate;
 
-@Entity
-public class SearchProfile {
-
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long Id;
-
+public class SearchProfileDTO {
+    private Long id;
     private String propertyType;
-
     private double minBudget;
-
     private double maxBudget;
-
     private double minSize;
-
     private double maxSize;
-
     private int rooms;
-
     private String area;
-
     private LocalDate createdAt;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
+    private Long userId; // reference to User
 
     // Getters
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public String getPropertyType() {
@@ -71,8 +52,8 @@ public class SearchProfile {
         return createdAt;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
 
@@ -80,7 +61,7 @@ public class SearchProfile {
 
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public void setPropertyType(String propertyType) {
@@ -115,7 +96,8 @@ public class SearchProfile {
         this.createdAt = createdAt;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
+

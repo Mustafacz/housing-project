@@ -19,8 +19,8 @@ public class User {
     private String email;
     private String phoneNumber;
     private String adress;
-   // @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    //private List<SearchProfile> searchProfiles;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<SearchProfile> searchProfiles;
 
 
     //Getters

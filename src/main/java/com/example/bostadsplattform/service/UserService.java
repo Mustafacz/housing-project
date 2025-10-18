@@ -52,10 +52,10 @@ public class UserService {
         }).toList();
     }
 
-    /*
+
     public UserDTO getUserById(Long id) {
         User user = userRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException(("User not found"));
+                .orElseThrow(() -> new RuntimeException("User not found"));
         UserDTO dto = new UserDTO();
         dto.setFirstName(user.getFirstName());
         dto.setLastName(user.getLastName());
@@ -64,5 +64,34 @@ public class UserService {
         dto.setAdress(user.getAdress());
         return dto;
     }
-   */
+
+    public UserDTO updateUser(Long id, UserDTO userDTO) {
+        User user = userRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setEmail(userDTO.getEmail());
+        user.setPhoneNumber(userDTO.getPhoneNumber());
+        user.setAdress(userDTO.getAdress());
+
+        User updatedUser = userRepo.save(user);
+
+        UserDTO result = new UserDTO();
+        result.setFirstName(updatedUser.getFirstName());
+        result.setLastName(updatedUser.getLastName());
+        result.setEmail(updatedUser.getEmail());
+        result.setPhoneNumber(updatedUser.getPhoneNumber());
+        result.setAdress(updatedUser.getAdress());
+
+        return result;
+    }
+
+    public void deleteUser(Long id) {
+        if (!userRepo.existsById(id)) {
+            throw new RuntimeException("User not found");
+        }
+        userRepo.deleteById(id);
+    }
+
 }
