@@ -9,7 +9,6 @@ import jakarta.persistence.GeneratedValue;
 
 @Entity
 public class Listing {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
@@ -25,10 +24,14 @@ public class Listing {
     private String imageUrl;
 
     private String createdAt;
+    private String propertyType;
+    private Double size;
+    private int rooms;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "broker_id")
+    private Broker broker;
+
 
 
     //Getters
@@ -61,13 +64,15 @@ public class Listing {
         return createdAt;
     }
 
-    public User getUser() {
-        return user;
-    }
+    public String getPropertyType() { return propertyType; }
 
+    public Double getSize() { return size; }
+
+    public int getRooms() { return rooms; }
+
+    public Broker getBroker() { return broker; }
 
     //Setters
-
 
     public void setId(Long id) {
         Id = id;
@@ -97,7 +102,12 @@ public class Listing {
         this.createdAt = createdAt;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+    public void setRooms(int rooms) { this.rooms = rooms; }
+
+    public void setSize(Double size) { this.size = size; }
+
+    public void setPropertyType(String propertyType) { this.propertyType = propertyType; }
+
+    public void setBroker(Broker broker) { this.broker = broker; }
+
 }

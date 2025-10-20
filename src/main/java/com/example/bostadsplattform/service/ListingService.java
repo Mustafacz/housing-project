@@ -1,8 +1,10 @@
 package com.example.bostadsplattform.service;
 
 import com.example.bostadsplattform.dto.ListingDTO;
+import com.example.bostadsplattform.model.Broker;
 import com.example.bostadsplattform.model.Listing;
 import com.example.bostadsplattform.model.User;
+import com.example.bostadsplattform.repository.BrokerRepo;
 import com.example.bostadsplattform.repository.ListingRepo;
 import com.example.bostadsplattform.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,8 @@ public class ListingService {
 
     @Autowired
     private ListingRepo listingRepo;
-
+    @Autowired
+    private BrokerRepo brokerRepo;
     @Autowired
     private UserRepo userRepo;
 
@@ -30,10 +33,11 @@ public class ListingService {
         listing.setImageUrl(listingDTO.getImageUrl());
         listing.setCreatedAt(listingDTO.getCreatedAt());
 
-        // Attach the user
-        User user = userRepo.findById(listingDTO.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        listing.setUser(user);
+        // Attach the broker
+        Broker broker = brokerRepo.findById(listingDTO.getBrokerId())
+                .orElseThrow(() -> new RuntimeException("Broker not found"));
+        listing.setBroker(broker);
+
 
         Listing savedListing = listingRepo.save(listing);
 
@@ -45,7 +49,8 @@ public class ListingService {
         result.setLocation(savedListing.getLocation());
         result.setImageUrl(savedListing.getImageUrl());
         result.setCreatedAt(savedListing.getCreatedAt());
-        result.setUserId(savedListing.getUser().getId());
+        result.setBrokerId(savedListing.getBroker().getId());
+
 
         return result;
     }
@@ -60,7 +65,8 @@ public class ListingService {
             dto.setLocation(listing.getLocation());
             dto.setImageUrl(listing.getImageUrl());
             dto.setCreatedAt(listing.getCreatedAt());
-            dto.setUserId(listing.getUser().getId());
+            dto.setBrokerId(listing.getBroker().getId());
+
             return dto;
         }).collect(Collectors.toList());
     }
@@ -76,7 +82,8 @@ public class ListingService {
         dto.setLocation(listing.getLocation());
         dto.setImageUrl(listing.getImageUrl());
         dto.setCreatedAt(listing.getCreatedAt());
-        dto.setUserId(listing.getUser().getId());
+        dto.setBrokerId(listing.getBroker().getId());
+
         return dto;
     }
 
@@ -101,7 +108,8 @@ public class ListingService {
         dto.setLocation(saved.getLocation());
         dto.setImageUrl(saved.getImageUrl());
         dto.setCreatedAt(saved.getCreatedAt());
-        dto.setUserId(saved.getUser().getId());
+        dto.setBrokerId(listing.getBroker().getId());
+
         return dto;
     }
 

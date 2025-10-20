@@ -12,16 +12,17 @@ public class ListingDTO {
     private String location;
     private String imageUrl;
     private String createdAt;
-    private Long userId; // reference to the user
+    private Long brokerId; // reference to the broker
 
     // Getters
+
+    public Long getBrokerId() { return brokerId; }
     public String getTitle() { return title; }
     public String getDescription() { return description; }
     public double getPrice() { return price; }
     public String getLocation() { return location; }
     public String getImageUrl() { return imageUrl; }
     public String getCreatedAt() { return createdAt; }
-    public Long getUserId() { return userId; }
 
     // Setters
     public void setTitle(String title) { this.title = title; }
@@ -30,5 +31,6 @@ public class ListingDTO {
     public void setLocation(String location) { this.location = location; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
     public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
-    public void setUserId(Long userId) { this.userId = userId; }
+
+    public void setBrokerId(Long brokerId) { this.brokerId = brokerId; }
 }

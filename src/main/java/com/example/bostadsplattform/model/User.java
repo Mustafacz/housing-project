@@ -6,19 +6,21 @@ import org.springframework.boot.autoconfigure.web.WebProperties;
 import java.util.List;
 
 @Entity
-@Table (name = "users")
+@Inheritance(strategy = InheritanceType.JOINED) // Subclassing strategy
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String firstName;
     private String lastName;
-    private String password;
-
     private String email;
+    private String password;
     private String phoneNumber;
     private String adress;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<SearchProfile> searchProfiles;
 

@@ -14,6 +14,8 @@ public class SearchProfileDTO {
     private LocalDate createdAt;
     private Long userId; // reference to User
 
+    private double matchScore; // add this to the DTO
+
     // Getters
 
     public Long getId() {
@@ -55,6 +57,8 @@ public class SearchProfileDTO {
     public Long getUserId() {
         return userId;
     }
+
+    public double getMatchScore() { return matchScore; }
 
 
     // Setters
@@ -99,5 +103,8 @@ public class SearchProfileDTO {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
+
+    public void setMatchScore(double matchScore) { this.matchScore = matchScore; }
+
 }
 

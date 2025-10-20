@@ -6,9 +6,10 @@ import com.example.bostadsplattform.model.User;
 import com.example.bostadsplattform.repository.SearchProfileRepo;
 import com.example.bostadsplattform.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class SearchProfileService {
 
     @Autowired
