@@ -2,6 +2,8 @@ package com.example.bostadsplattform.dto;
 
 public class UserDTO {
 
+    private Long id;
+
     private String firstName;
 
     private String lastName;
@@ -13,6 +15,9 @@ public class UserDTO {
     private String phoneNumber;
 
     private String adress;
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
     //Getters
     public String getFirstName() {

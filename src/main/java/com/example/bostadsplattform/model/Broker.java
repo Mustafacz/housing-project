@@ -5,7 +5,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "brokers")
-public class Broker extends User {
+public class  Broker extends User {
 
     private String companyName;
     private boolean subscriptionActive;

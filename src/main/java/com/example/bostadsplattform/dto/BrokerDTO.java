@@ -1,16 +1,30 @@
 package com.example.bostadsplattform.dto;
 
 public class BrokerDTO {
+
+    private Long id;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     private String phoneNumber;
     private String companyName;
+    private String adress;
     private boolean subscriptionActive;
 
     // Getters and Setters
 
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
 
     public String getFirstName() {
         return firstName;

@@ -32,7 +32,7 @@ public class MatchingService {
 
         // Filter using score threshold
         List<SearchProfile> matched = allProfiles.stream()
-                .filter(profile -> calculateScore(listing, profile) >= 70) // threshold = 70
+                .filter(profile -> calculateScore(listing, profile) >= 30) // threshold = 70
                 .collect(Collectors.toList());
 
         // Convert to DTO with score
@@ -57,10 +57,13 @@ public class MatchingService {
         double score = 0;
 
         // Property type
-        if (profile.getPropertyType() != null && !profile.getPropertyType().isBlank()) {
+        if (profile.getPropertyType() != null && !profile.getPropertyType().isBlank()
+                && listing.getPropertyType() != null && !listing.getPropertyType().isBlank()) {
+
             if (profile.getPropertyType().equalsIgnoreCase(listing.getPropertyType())) score += 30;
             else if (listing.getPropertyType().toLowerCase().contains(profile.getPropertyType().toLowerCase())) score += 15;
         }
+
 
         // Budget
         double price = listing.getPrice();
