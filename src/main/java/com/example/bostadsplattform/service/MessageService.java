@@ -69,6 +69,17 @@ public class MessageService {
         return messages.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
+    // Get conversation between two users (both directions)
+    public List<Message> getConversation(Long user1Id, Long user2Id) {
+        User user1 = userRepo.findById(user1Id)
+                .orElseThrow(() -> new RuntimeException("User 1 not found"));
+        User user2 = userRepo.findById(user2Id)
+                .orElseThrow(() -> new RuntimeException("User 2 not found"));
+
+        return messageRepo.findBySenderAndReceiverOrReceiverAndSender(user1, user2, user1, user2);
+    }
+
+
     // Convert entity to DTO
     private MessageDTO toDTO(Message message) {
         MessageDTO dto = new MessageDTO();

@@ -14,4 +14,11 @@ public interface MessageRepo extends JpaRepository<Message, Long> {
 
     // Get all messages related to a specific listing
     List<Message> findByListing(Listing listing);
+
+    // Get conversation between two users (both directions)
+    List<Message> findBySenderAndReceiverOrReceiverAndSender(
+            User sender1, User receiver1,
+            User sender2, User receiver2
+    );
+
 }
