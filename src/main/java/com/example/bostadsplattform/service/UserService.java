@@ -4,6 +4,8 @@ import com.example.bostadsplattform.dto.UserDTO;
 import com.example.bostadsplattform.model.User;
 import com.example.bostadsplattform.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +15,16 @@ public class UserService {
 
     @Autowired
     private UserRepo userRepo;
+
+    public User createUserFromEntity(User user) {
+        return userRepo.save(user);
+    }
+
+    public User getUserByEmail(String email) {
+        return userRepo.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
 
     public UserDTO createUser(UserDTO userDTO) {
         User user = new User();
@@ -92,6 +104,16 @@ public class UserService {
             throw new RuntimeException("User not found");
         }
         userRepo.deleteById(id);
+    }
+
+    public User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new RuntimeException("No authenticated user found");
+        }
+
+        String email = authentication.getName(); // JWT username (email)
+        return getUserByEmail(email);
     }
 
 }

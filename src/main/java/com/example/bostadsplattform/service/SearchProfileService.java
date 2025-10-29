@@ -147,7 +147,4 @@ public class SearchProfileService {
         searchProfileRepo.delete(profile);
     }
 
-
-
-
 }

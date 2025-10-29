@@ -4,6 +4,8 @@ import com.example.bostadsplattform.dto.BrokerDTO;
 import com.example.bostadsplattform.model.Broker;
 import com.example.bostadsplattform.repository.BrokerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +16,16 @@ public class BrokerService {
 
     @Autowired
     private BrokerRepo brokerRepo;
+
+    public Broker createBrokerFromEntity(Broker broker) {
+        return brokerRepo.save(broker);
+    }
+
+    public Broker getBrokerByEmail(String email) {
+        return brokerRepo.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Broker not found"));
+    }
+
 
     public BrokerDTO createBroker(BrokerDTO dto) {
         Broker broker = new Broker();
@@ -79,4 +91,15 @@ public class BrokerService {
         dto.setPassword(broker.getPassword());
         return dto;
     }
+
+    public Broker getCurrentBroker() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new RuntimeException("No authenticated broker found");
+        }
+
+        String email = authentication.getName();
+        return getBrokerByEmail(email);
+    }
+
 }
