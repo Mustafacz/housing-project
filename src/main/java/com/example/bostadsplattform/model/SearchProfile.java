@@ -4,6 +4,7 @@ package com.example.bostadsplattform.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class SearchProfile {
@@ -27,6 +28,10 @@ public class SearchProfile {
     private String area;
 
     private LocalDate createdAt;
+    @ElementCollection
+    @CollectionTable(name = "searchprofile_images", joinColumns = @JoinColumn(name = "searchprofile_id"))
+    @Column(name = "image_url")
+    private List<String> imageUrls;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -74,6 +79,9 @@ public class SearchProfile {
     public User getUser() {
         return user;
     }
+
+    public List<String> getImageUrls() { return imageUrls; }
+    public void setImageUrls(List<String> imageUrls) { this.imageUrls = imageUrls; }
 
 
     // Setters

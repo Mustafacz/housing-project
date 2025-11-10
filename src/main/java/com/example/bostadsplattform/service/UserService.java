@@ -40,12 +40,15 @@ public class UserService {
         User savedUser = userRepo.save(user);
 
         UserDTO result = new UserDTO();
+        result.setId(savedUser.getId());
         result.setFirstName(savedUser.getFirstName());
         result.setLastName(savedUser.getLastName());
         result.setEmail(savedUser.getEmail());
         result.setPhoneNumber(savedUser.getPhoneNumber());
         result.setAdress(savedUser.getAdress());
         result.setPassword(savedUser.getPassword());
+        result.setProfileImageUrl(savedUser.getProfileImageUrl()); // NEW
+
 
 
         return result;
@@ -55,6 +58,7 @@ public class UserService {
 
         return userRepo.findAll().stream().map(user -> {
         UserDTO dto = new UserDTO();
+        dto.setId(user.getId());
         dto.setFirstName(user.getFirstName());
         dto.setLastName(user.getLastName());
         dto.setEmail(user.getEmail());
@@ -69,11 +73,14 @@ public class UserService {
         User user = userRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         UserDTO dto = new UserDTO();
+        dto.setId(user.getId());
         dto.setFirstName(user.getFirstName());
         dto.setLastName(user.getLastName());
         dto.setEmail(user.getEmail());
         dto.setPhoneNumber(user.getPhoneNumber());
         dto.setAdress(user.getAdress());
+        dto.setProfileImageUrl(user.getProfileImageUrl());       // NEW
+
         return dto;
     }
 

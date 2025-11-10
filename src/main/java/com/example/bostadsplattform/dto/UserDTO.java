@@ -3,18 +3,18 @@ package com.example.bostadsplattform.dto;
 public class UserDTO {
 
     private Long id;
-
     private String firstName;
-
     private String lastName;
-
     private String password;
-
     private String email;
-
     private String phoneNumber;
-
     private String adress;
+    private String profileImageUrl;
+
+
+
+    public String getProfileImageUrl() { return profileImageUrl; }
+    public void setProfileImageUrl(String profileImageUrl) { this.profileImageUrl = profileImageUrl; }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

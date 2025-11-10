@@ -1,5 +1,6 @@
 package com.example.bostadsplattform.security;
 
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -65,4 +66,3 @@ public class JwtUtil {
         return expiration.before(new Date());
     }
 }
-

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 
+import java.util.List;
 
 
 @Entity
@@ -12,21 +13,19 @@ public class Listing {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-
     private String title;
-
     private String description;
-
     private double price;
-
     private String location;
-
-    private String imageUrl;
-
     private String createdAt;
     private String propertyType;
     private Double size;
     private int rooms;
+
+    @ElementCollection
+    @CollectionTable(name = "listing_images", joinColumns = @JoinColumn(name = "listing_id"))
+    @Column(name = "image_url")
+    private List<String> imageUrls;
 
     @ManyToOne
     @JoinColumn(name = "broker_id")
@@ -56,9 +55,7 @@ public class Listing {
         return location;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
+    public List<String> getImageUrls() { return imageUrls; }
 
     public String getCreatedAt() {
         return createdAt;
@@ -93,10 +90,7 @@ public class Listing {
     public void setLocation(String location) {
         this.location = location;
     }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+    public void setImageUrls(List<String> imageUrls) { this.imageUrls = imageUrls; }
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;

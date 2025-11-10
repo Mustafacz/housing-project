@@ -30,7 +30,7 @@ public class ListingService {
         listing.setDescription(listingDTO.getDescription());
         listing.setPrice(listingDTO.getPrice());
         listing.setLocation(listingDTO.getLocation());
-        listing.setImageUrl(listingDTO.getImageUrl());
+        listing.setImageUrls(listingDTO.getImageUrls()); // instead of setImageUrl
         listing.setCreatedAt(listingDTO.getCreatedAt());
 
         // Attach the broker
@@ -47,9 +47,10 @@ public class ListingService {
         result.setDescription(savedListing.getDescription());
         result.setPrice(savedListing.getPrice());
         result.setLocation(savedListing.getLocation());
-        result.setImageUrl(savedListing.getImageUrl());
+        result.setImageUrls(savedListing.getImageUrls());
         result.setCreatedAt(savedListing.getCreatedAt());
         result.setBrokerId(savedListing.getBroker().getId());
+
 
 
         return result;
@@ -63,7 +64,7 @@ public class ListingService {
             dto.setDescription(listing.getDescription());
             dto.setPrice(listing.getPrice());
             dto.setLocation(listing.getLocation());
-            dto.setImageUrl(listing.getImageUrl());
+            dto.setImageUrls(listing.getImageUrls());
             dto.setCreatedAt(listing.getCreatedAt());
             dto.setBrokerId(listing.getBroker().getId());
 
@@ -80,7 +81,7 @@ public class ListingService {
         dto.setDescription(listing.getDescription());
         dto.setPrice(listing.getPrice());
         dto.setLocation(listing.getLocation());
-        dto.setImageUrl(listing.getImageUrl());
+        dto.setImageUrls(listing.getImageUrls());
         dto.setCreatedAt(listing.getCreatedAt());
         dto.setBrokerId(listing.getBroker().getId());
 
@@ -96,7 +97,7 @@ public class ListingService {
         listing.setDescription(listingDTO.getDescription());
         listing.setPrice(listingDTO.getPrice());
         listing.setLocation(listingDTO.getLocation());
-        listing.setImageUrl(listingDTO.getImageUrl());
+        listing.setImageUrls(listingDTO.getImageUrls());
         listing.setCreatedAt(listingDTO.getCreatedAt());
 
         Listing saved = listingRepo.save(listing);
@@ -106,7 +107,7 @@ public class ListingService {
         dto.setDescription(saved.getDescription());
         dto.setPrice(saved.getPrice());
         dto.setLocation(saved.getLocation());
-        dto.setImageUrl(saved.getImageUrl());
+        dto.setImageUrls(saved.getImageUrls());
         dto.setCreatedAt(saved.getCreatedAt());
         dto.setBrokerId(listing.getBroker().getId());
 

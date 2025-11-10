@@ -32,6 +32,7 @@ public class SearchProfileService {
         searchProfile.setRooms(dto.getRooms());
         searchProfile.setArea(dto.getArea());
         searchProfile.setCreatedAt(dto.getCreatedAt());
+        searchProfile.setImageUrls(dto.getImageUrls());
         searchProfile.setUser(user);
 
         SearchProfile savedProfile = searchProfileRepo.save(searchProfile);
@@ -46,6 +47,7 @@ public class SearchProfileService {
         result.setRooms(savedProfile.getRooms());
         result.setArea(savedProfile.getArea());
         result.setCreatedAt(savedProfile.getCreatedAt());
+        result.setImageUrls(savedProfile.getImageUrls());
         result.setUserId(savedProfile.getUser().getId());
 
         return result;
@@ -120,6 +122,7 @@ public class SearchProfileService {
         profile.setRooms(dto.getRooms());
         profile.setArea(dto.getArea());
         profile.setCreatedAt(dto.getCreatedAt());
+        profile.setImageUrls(dto.getImageUrls());
 
         // Save updated entity
         SearchProfile updatedProfile = searchProfileRepo.save(profile);
@@ -135,6 +138,7 @@ public class SearchProfileService {
         result.setRooms(updatedProfile.getRooms());
         result.setArea(updatedProfile.getArea());
         result.setCreatedAt(updatedProfile.getCreatedAt());
+        result.setImageUrls(updatedProfile.getImageUrls());
         result.setUserId(updatedProfile.getUser().getId());
 
         return result;

@@ -35,12 +35,26 @@ public class BrokerService {
         broker.setPassword(dto.getPassword());
         broker.setPhoneNumber(dto.getPhoneNumber());
         broker.setCompanyName(dto.getCompanyName());
+        broker.setProfileImageUrl(dto.getProfileImageUrl());
         broker.setSubscriptionActive(dto.isSubscriptionActive());
 
         Broker saved = brokerRepo.save(broker);
 
-        dto.setSubscriptionActive(saved.isSubscriptionActive());
-        return dto;
+        // Map DTO including ID
+        BrokerDTO result = new BrokerDTO();
+        result.setId(saved.getId());
+        result.setFirstName(saved.getFirstName());
+        result.setLastName(saved.getLastName());
+        result.setEmail(saved.getEmail());
+        result.setPhoneNumber(saved.getPhoneNumber());
+        result.setCompanyName(saved.getCompanyName());
+        result.setProfileImageUrl(saved.getProfileImageUrl()); // <--- add this
+        result.setSubscriptionActive(saved.isSubscriptionActive());
+
+        // optional: skip password
+        // result.setPassword(saved.getPassword());
+
+        return result;
     }
 
     // GET all brokers
@@ -67,6 +81,7 @@ public class BrokerService {
         broker.setEmail(dto.getEmail());
         broker.setPhoneNumber(dto.getPhoneNumber());
         broker.setAdress(dto.getAdress());
+        broker.setProfileImageUrl(dto.getProfileImageUrl());
         broker.setPassword(dto.getPassword());
 
         Broker updated = brokerRepo.save(broker);
@@ -89,6 +104,8 @@ public class BrokerService {
         dto.setPhoneNumber(broker.getPhoneNumber());
         dto.setAdress(broker.getAdress());
         dto.setPassword(broker.getPassword());
+        dto.setProfileImageUrl(broker.getProfileImageUrl());       // NEW
+
         return dto;
     }
 

@@ -1,6 +1,7 @@
 package com.example.bostadsplattform.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class SearchProfileDTO {
     private Long id;
@@ -13,8 +14,12 @@ public class SearchProfileDTO {
     private String area;
     private LocalDate createdAt;
     private Long userId; // reference to User
-
     private double matchScore; // add this to the DTO
+
+    private List<String> imageUrls;
+
+    public List<String> getImageUrls() { return imageUrls; }
+    public void setImageUrls(List<String> imageUrls) { this.imageUrls = imageUrls; }
 
     // Getters
 

@@ -18,6 +18,8 @@ public class User {
     private String email;
     private String phoneNumber;
     private String adress;
+    private String profileImageUrl;
+
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<SearchProfile> searchProfiles;
@@ -53,4 +55,7 @@ public class User {
 
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
+
+    public String getProfileImageUrl() { return profileImageUrl; }
+    public void setProfileImageUrl(String profileImageUrl) { this.profileImageUrl = profileImageUrl; }
 }

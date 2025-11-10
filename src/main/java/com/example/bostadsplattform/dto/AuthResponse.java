@@ -9,12 +9,22 @@ public class AuthResponse {
     private String lastName;
 
     // Existing constructor
+    // ✅ Constructor used for login/register (only token)
     public AuthResponse(String token) {
         this.token = token;
     }
 
-    // NEW constructor for /whoami
+    // ✅ Constructor used for whoAmI (user info only)
     public AuthResponse(String email, String role, String firstName, String lastName) {
+        this.email = email;
+        this.role = role;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    // ✅ Constructor used when returning both token + user info
+    public AuthResponse(String token, String email, String role, String firstName, String lastName) {
+        this.token = token;
         this.email = email;
         this.role = role;
         this.firstName = firstName;

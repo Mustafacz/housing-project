@@ -39,20 +39,23 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()                     // disable CSRF for testing / API
+                .csrf().disable()
                 .cors().and()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll()   // allow register & login
-                        .requestMatchers("/users", "/users/**", "/actuator/**").permitAll()
-                        .anyRequest().authenticated()              // everything else requires JWT
+                        .requestMatchers("/auth/login", "/auth/register/**").permitAll()
+                        .requestMatchers("/auth/whoami").authenticated() // ✅ require JWT
+                        .requestMatchers("/users/**").hasAnyRole("USER", "BROKER", "ADMIN")
+                        .requestMatchers("/brokers/**").hasAnyRole("BROKER", "ADMIN")
+                        .requestMatchers("/actuator/**").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
 
-        // add JWT filter
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
+
 }

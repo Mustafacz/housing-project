@@ -46,7 +46,13 @@ public class AuthController {
         userService.createUserFromEntity(user);
 
         String token = jwtUtil.generateToken(user.getEmail(), user.getRole());
-        return new AuthResponse(token);
+        return new AuthResponse(
+                token,
+                user.getEmail(),
+                user.getRole(),
+                user.getFirstName(),
+                user.getLastName()
+        );
     }
 
     // Register broker
@@ -66,7 +72,13 @@ public class AuthController {
         brokerService.createBrokerFromEntity(broker);
 
         String token = jwtUtil.generateToken(broker.getEmail(), broker.getRole());
-        return new AuthResponse(token);
+        return new AuthResponse(
+                token,
+                broker.getEmail(),
+                broker.getRole(),
+                broker.getFirstName(),
+                broker.getLastName()
+        );
     }
 
     // Login (shared)

@@ -11,8 +11,12 @@ public class BrokerDTO {
     private String companyName;
     private String adress;
     private boolean subscriptionActive;
+    private String profileImageUrl;
+
 
     // Getters and Setters
+    public String getProfileImageUrl() { return profileImageUrl; }
+    public void setProfileImageUrl(String profileImageUrl) { this.profileImageUrl = profileImageUrl; }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
