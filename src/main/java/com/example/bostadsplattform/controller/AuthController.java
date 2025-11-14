@@ -84,15 +84,36 @@ public class AuthController {
     // Login (shared)
     @PostMapping("/login")
     public AuthResponse login(@RequestBody LoginRequest request) {
+        // Authenticate credentials
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
 
-        // Fetch user or broker
-        User user = userService.getUserByEmail(request.getEmail());
-        String token = jwtUtil.generateToken(user.getEmail(), user.getRole());
-        return new AuthResponse(token);
+        try {
+            // Try broker first
+            Broker broker = brokerService.getBrokerByEmail(request.getEmail());
+            String token = jwtUtil.generateToken(broker.getEmail(), broker.getRole());
+            return new AuthResponse(
+                    token,
+                    broker.getEmail(),
+                    broker.getRole(),
+                    broker.getFirstName(),
+                    broker.getLastName()
+            );
+        } catch (Exception e) {
+            // Fall back to normal user
+            User user = userService.getUserByEmail(request.getEmail());
+            String token = jwtUtil.generateToken(user.getEmail(), user.getRole());
+            return new AuthResponse(
+                    token,
+                    user.getEmail(),
+                    user.getRole(),
+                    user.getFirstName(),
+                    user.getLastName()
+            );
+        }
     }
+
 
     @GetMapping("/whoami")
     public AuthResponse whoAmI(Authentication authentication) {
